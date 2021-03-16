@@ -3,6 +3,10 @@
       app
       color="primary"
       dark
+      shrink-on-scroll
+      src="https://picsum.photos/1920/1080?random"
+      fade-img-on-scroll
+      elevation = 1
   >
     <div class="d-flex align-center">
       <v-img
@@ -23,23 +27,33 @@
           width="100"
       />
     </div>
-
     <v-spacer></v-spacer>
-
+    <v-toolbar-title>Projects for future</v-toolbar-title>
+    <v-spacer></v-spacer>
     <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        v-for="link in links"
+        :key="link"
+        color="white"
         text
-    >
-      <span class="mr-2">Latest Release</span>
-      <v-icon>mdi-open-in-new</v-icon>
+        rounded
+        class="my-2"
+    >{{ link }}
     </v-btn>
   </v-app-bar>
 </template>
 
 <script>
 export default {
-name: "AppBar"
+name: "AppBar",
+  data: () => ({
+    links: [
+      'Home',
+      'Login',
+      'Registrieren',
+      'Neues Projekt',
+      'So funktioniert´s',
+    ],
+  }),
 }
 </script>
 

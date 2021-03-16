@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <v-parallax
+        dark
+        src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+    >
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
@@ -88,6 +92,7 @@
         </v-row>
       </v-col>
     </v-row>
+    </v-parallax>
   </v-container>
 </template>
 

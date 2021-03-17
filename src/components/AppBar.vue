@@ -32,13 +32,15 @@
     <v-spacer></v-spacer>
     <v-btn
         v-for="link in links"
-        :key="link"
+        :key="link.title"
+        :to="link.path"
         color="white"
         text
         rounded
         class="my-2"
-    >{{ link }}
+    >{{ link.title }}
     </v-btn>
+
   </v-app-bar>
 </template>
 
@@ -47,11 +49,11 @@ export default {
 name: "AppBar",
   data: () => ({
     links: [
-      'Home',
-      'Login',
-      'Registrieren',
-      'Neues Projekt',
-      'So funktioniert´s',
+      {title: 'Home', path: '/'}, //Man kann auch icon hinzufügen { title: 'Home', path: '/home', icon: 'home' },
+      {title: 'Login', path: '/Login'},
+      {title: 'Register', path: '/Register'},
+      {title: 'Neues Projekt', path: '/NeuesProjekt'},
+      {title: 'So funktioniert´s', path: '/SoFunktionierts'}
     ],
   }),
 }

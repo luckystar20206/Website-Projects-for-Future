@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class ="my-0">
     <v-parallax
         dark
         src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
@@ -15,17 +15,16 @@
       </v-col>
 
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
+        <h1 class="display-3 font-weight-bold mb-3">
+          Welcome to ProjectsForFuture
         </h1>
+        <h2 class="my-4 display-1 font-weight-bold mb3">
+          Contribute to save our world!
+        </h2>
 
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
+        <p class="my-4 white--text font-weight-regular" >
+          Trage dazu bei dass unser Planet lebenswert bleibt und entscheide mit, <br>
+          welches Projekt sich eignet, um das Klima konstruktiv zu beschützen.
         </p>
       </v-col>
 
@@ -93,6 +92,10 @@
       </v-col>
     </v-row>
     </v-parallax>
+    <v-card>
+      <v-row class="text-center">
+      </v-row>
+    </v-card>
   </v-container>
 </template>
 

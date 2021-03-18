@@ -30,8 +30,7 @@
           width="100"
       />
     </div>
-    <v-spacer></v-spacer>
-    <v-flex xs12 md 4>
+    <v-flex ml-5 xs12 md 4>
     <v-btn
         v-for="link in links"
         :key="link.title"

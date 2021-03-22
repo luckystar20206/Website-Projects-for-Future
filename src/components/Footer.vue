@@ -28,7 +28,7 @@
 
       <v-card-text class="primary lighten-2 py-4 text-center white--text" cols="12">
 
-        {{ new Date().getFullYear() }} — <strong>Blocklink GmbH</strong>
+        {{ new Date().getFullYear() }} — <a href ="https://www.blocklink.de" class ="primary lighten-2 py-4 text-center white--text" target ="”_blank”">Blocklink GmbH</a>
       </v-card-text>
     </v-card>
   </v-footer>

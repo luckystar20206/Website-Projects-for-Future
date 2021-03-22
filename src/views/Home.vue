@@ -1,9 +1,5 @@
 <template>
-  <v-container class ="my-0">
-    <v-parallax
-        dark
-        src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-    >
+  <v-container>
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
@@ -91,18 +87,17 @@
         </v-row>
       </v-col>
     </v-row>
-    </v-parallax>
-    <v-card>
-      <v-row class="text-center">
-      </v-row>
-    </v-card>
+    <ActiveProjects/>
+    <Newsletter/>
   </v-container>
 </template>
 
 <script>
+  import Newsletter from "@/components/Newsletter";
+  import ActiveProjects from "@/components/ActiveProjects";
   export default {
     name: 'Home',
-
+    components: {ActiveProjects, Newsletter},
     data: () => ({
       ecosystem: [
         {
@@ -157,3 +152,4 @@
     }),
   }
 </script>
+

@@ -12,6 +12,34 @@
         <v-menu
             bottom
             left
+            rounded = "lg"
+            >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+                dark
+                text
+                v-bind="attrs"
+                v-on="on"
+            >aufsteigend
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+                v-for="property in sort"
+                :key="property.name"
+                link
+            >
+              <v-list-item-icon>
+                <v-icon>{{property.icon}}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title @click="sortByAsc(property.sortProperty)">{{property.name}}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-menu
+            bottom
+            left
+            rounded = "lg"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
@@ -19,16 +47,18 @@
                 text
                 v-bind="attrs"
                 v-on="on"
-            >Sortieren
+            >absteigend
             </v-btn>
           </template>
-
           <v-list>
             <v-list-item
                 v-for="property in sort"
                 :key="property.name"
+                link
             >
-              <v-list-item-icon>{{}}</v-list-item-icon>
+              <v-list-item-icon>
+                <v-icon>{{property.icon}}</v-icon>
+              </v-list-item-icon>
               <v-list-item-title @click="sortByDesc(property.sortProperty)">{{property.name}}</v-list-item-title>
             </v-list-item>
           </v-list>
@@ -58,8 +88,7 @@
               <div class = ma-1><span class = "text-md-subtitle-2 black--text font-weight-bold" >Finanzbedarf: </span><span class = grey--text>{{project.needs}}€</span></div>
 
               <vue-countdown :time= "getRemainingTime(project)" :transform="transformSlotProps" v-slot="{ days, hours, minutes, seconds}">
-                <div class = ma-1> <span class = "text-md-subtitle-2 black--text font-weight-bold" >Restzeit：</span> <span class = grey--text>{{ days }} Tage, {{hours}}:{{ minutes }}:{{ seconds }}.
- </span></div>
+                <div class = ma-1> <span class = "text-md-subtitle-2 black--text font-weight-bold" >Restzeit：</span> <span class = grey--text>{{ days }} Tage, {{hours}}:{{ minutes }}:{{ seconds }}.</span></div>
               </vue-countdown>
 
               <div class = ma-1><span class = "text-md-subtitle-2 black--text font-weight-bold" >Unterstützer: </span> <span class = grey--text>{{project.supporterCount}}</span></div>
@@ -91,10 +120,10 @@ export default {
   data() {
     return {
       sort: [
-        {name: 'Alphabetisch', sortProperty:'title', ascending: true,},
-        {name: 'Ablauf', sortProperty:'due', ascending: true,},
-        {name: 'Finanzbedarf', sortProperty:'needs', ascending: true,},
-        {name: 'Unterstützer', sortProperty:'supporterCount', ascending: true,},
+        {name: 'Alphabetisch', sortProperty:'title', ascending: true,icon:'sort_by_alpha'},
+        {name: 'Restzeit', sortProperty:'due', ascending: true,icon: 'access_time'},
+        {name: 'Finanzbedarf', sortProperty:'needs', ascending: true,icon:'euro'},
+        {name: 'Unterstützer', sortProperty:'supporterCount', ascending: true,icon:'accessibility'},
       ],
       projects:[
         {
@@ -103,7 +132,7 @@ export default {
           goal:"Die karge Landschaft zu verschönern und alles zu retten und grüner zu machen lorem ipsum...",
           needs:400,
           due:new Date(2021,7,1,2,21),
-          supporterCount: 42,
+          supporterCount: 53,
           upvoteCount: 0,
           downvoteCount:0,
           amount: 77,
@@ -114,8 +143,8 @@ export default {
           img: "/avatar-2.png",
           goal:"Bienen retten",
           needs:230,
-          due:new Date(2021,5,14,4,48),
-          supporterCount: 101,
+          due:new Date(2021,5,12,9,43),
+          supporterCount: 71,
           upvoteCount: 0,
           downvoteCount:0,
           amount: 150,
@@ -127,7 +156,7 @@ export default {
           goal:"Projects for future",
           needs:1000,
           due:new Date(2021,8,12,4,58),
-          supporterCount: 1,
+          supporterCount: 4,
           upvoteCount: 0,
           downvoteCount:0,
           amount: 45,
@@ -139,7 +168,7 @@ export default {
           goal:"Die karge Landschaft zu verschönern",
           needs:400,
           due:new Date(2021,2,14,4,58),
-          supporterCount: 42,
+          supporterCount: 98,
           upvoteCount: 0,
           downvoteCount:0,
           amount: 45,
@@ -149,20 +178,23 @@ export default {
           title:"Esse Pflanzen im Ruhrgebiet",
           img: "/avatar-5.jpg",
           goal:"Die karge Landschaft zu verschönern",
-          needs:400,
+          needs:555,
           due:new Date(2021,5,14,4,38),
           supporterCount: 42,
           upvoteCount: 0,
           downvoteCount:0,
-          amount: 45,
+          amount: 70,
           progress: (this.amount / this.needs),
         },
       ],
     }
   },
   methods:{
-    sortByDesc(prop) {
+    sortByAsc(prop) {
       this.projects.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
+    },
+    sortByDesc(prop) {
+      this.projects.sort((a,b) => a[prop] > b[prop] ? -1 : 1)
     },
     getProgress(project){
       return (project.amount / project.needs)*100

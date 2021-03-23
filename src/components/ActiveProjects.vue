@@ -1,9 +1,9 @@
 <template>
-  <div class="team">
+  <div class="active projects">
     <h1 class="subheading grey--text">Aktive Projekte</h1>
 
     <v-container class="my-5">
-      <v-toolbar  color = "deep-purple accent-4" dense dark>
+      <v-toolbar  color = "deep-purple accent-4" dense dark class ="mb-6">
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>
           Aktive Projekte
@@ -37,24 +37,39 @@
 
       <v-layout row wrap>
         <v-flex xs12 sm6 md4 lg3 v-for="project in projects" :key="project.title">
-          <v-card class="text-xs-center ma-3">
-            <v-responsive class="pt-4">
-              image here
+          <v-card class="ma-3">
+            <v-responsive class="text-center pt-4">
+              <v-avatar size ="100">
+                <img :src = "project.img" alt="">
+              </v-avatar>
             </v-responsive>
             <v-card-text>
-              <div class ="subheading">{{project.title}}</div>
-              <div class = "grey--text">Ziel: {{project.goal}}</div>
-              <div class = "grey--text">Finanzbedarf: {{project.needs}}</div>
-              <vue-countdown :time= "project.time" v-slot="{ days, hours, minutes}">
-                <div class = "grey--text"> Restzeit：{{ days }} days, {{hours}} hours, {{ minutes }} minutes.</div>
+              <div class ="text-center headline">{{project.title}}</div>
+              <v-progress-linear
+                  color="green"
+                  height="12"
+                  :value ="getProgress(project)"
+              >
+                 <!-- value = project.progress irgendwie setzen, ist aber keine zahl!-->
+                <strong>{{project.amount}}€ von {{project.needs}}€</strong>
+
+              </v-progress-linear>
+              <div class = ma-1><span class = "text-md-subtitle-2 black--text font-weight-bold" >Ziel: </span> <span class = grey--text>{{project.goal}}</span></div>
+              <div class = ma-1><span class = "text-md-subtitle-2 black--text font-weight-bold" >Finanzbedarf: </span><span class = grey--text>{{project.needs}}€</span></div>
+
+              <vue-countdown :time= "getRemainingTime(project)" :transform="transformSlotProps" v-slot="{ days, hours, minutes, seconds}">
+                <div class = ma-1> <span class = "text-md-subtitle-2 black--text font-weight-bold" >Restzeit：</span> <span class = grey--text>{{ days }} Tage, {{hours}}:{{ minutes }}:{{ seconds }}.
+ </span></div>
               </vue-countdown>
-              <div class="grey--text">Unterstützer: {{project.supporterCount}}</div>
+
+              <div class = ma-1><span class = "text-md-subtitle-2 black--text font-weight-bold" >Unterstützer: </span> <span class = grey--text>{{project.supporterCount}}</span></div>
             </v-card-text>
             <v-card-actions>
               <v-btn flat color ="grey">
                 <v-icon small left>thumb_up</v-icon>
                 <span class ="">Upvote</span>
               </v-btn>
+              <v-spacer></v-spacer>
               <v-btn flat color ="grey">
                 <v-icon small left>thumb_down</v-icon>
                 <span class ="">Downvote</span>
@@ -70,7 +85,9 @@
 </template>
 
 <script>
+import VueCountdown from '@chenfengyuan/vue-countdown';
 export default {
+  components:{VueCountdown},
   data() {
     return {
       sort: [
@@ -82,43 +99,63 @@ export default {
       projects:[
         {
           title:"Bäume Pflanzen im Ruhrgebiet",
+          img: '/avatar-1.jpg',
           goal:"Die karge Landschaft zu verschönern und alles zu retten und grüner zu machen lorem ipsum...",
           needs:400,
-          due:new Date(2021,11,14,4,58),
-          time:this.due - new Date(),
+          due:new Date(2021,7,1,2,21),
           supporterCount: 42,
+          upvoteCount: 0,
+          downvoteCount:0,
+          amount: 77,
+          progress: (this.amount / this.needs),
         },
         {
           title:"Blumen gießen",
+          img: "/avatar-2.png",
           goal:"Bienen retten",
           needs:230,
-          due:new Date(2021,11,14,4,58),
-          time:this.due - new Date(),
+          due:new Date(2021,5,14,4,48),
           supporterCount: 101,
+          upvoteCount: 0,
+          downvoteCount:0,
+          amount: 150,
+          progress: (this.amount / this.needs),
         },
         {
-          title:"Noch ein Projekt",
+          title:"Pflanze Pflanzen im Ruhrgebiet",
+          img: "/avatar-3.png",
           goal:"Projects for future",
           needs:1000,
-          due:new Date(2021,11,14,4,58),
-          time:this.due - new Date(),
+          due:new Date(2021,8,12,4,58),
           supporterCount: 1,
+          upvoteCount: 0,
+          downvoteCount:0,
+          amount: 45,
+          progress: (this.amount / this.needs),
         },
         {
-          title:"Alle Pflanzen im Ruhrgebiet",
+          title:"Rauche Pflanzen im Ruhrgebiet",
+          img: "/avatar-4.jpg",
           goal:"Die karge Landschaft zu verschönern",
           needs:400,
-          due:new Date(2021,11,14,4,58),
-          time:this.due - new Date(),
+          due:new Date(2021,2,14,4,58),
           supporterCount: 42,
+          upvoteCount: 0,
+          downvoteCount:0,
+          amount: 45,
+          progress: (this.amount / this.needs),
         },
         {
           title:"Esse Pflanzen im Ruhrgebiet",
+          img: "/avatar-5.jpg",
           goal:"Die karge Landschaft zu verschönern",
           needs:400,
-          due:new Date(2021,11,14,4,58),
-          time:this.due - new Date(),
+          due:new Date(2021,5,14,4,38),
           supporterCount: 42,
+          upvoteCount: 0,
+          downvoteCount:0,
+          amount: 45,
+          progress: (this.amount / this.needs),
         },
       ],
     }
@@ -126,7 +163,22 @@ export default {
   methods:{
     sortByDesc(prop) {
       this.projects.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
-    }
+    },
+    getProgress(project){
+      return (project.amount / project.needs)*100
+    },
+    getRemainingTime(project){
+      return project.due - new Date()
+    },
+    transformSlotProps(props) {
+      const formattedProps = {};
+
+      Object.entries(props).forEach(([key, value]) => {
+        formattedProps[key] = value < 10 ? `0${value}` : String(value);
+      });
+
+      return formattedProps;
+    },
   }
 }
 </script>

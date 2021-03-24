@@ -3,6 +3,13 @@
     <h1 class="subheading grey--text">Aktive Projekte</h1>
 
     <v-container class="my-5">
+      <v-data-iterator
+          :items="projects"
+          :items-per-page="5"
+          item-key="title"
+          show-select
+          class="elevation-1"
+      >
       <v-toolbar  color = "deep-purple accent-4" dense dark class ="mb-6">
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>
@@ -10,7 +17,8 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field
-            v-model="search"
+            v-model="filter"
+            type="text"
             clearable
             flat
             solo-inverted
@@ -74,9 +82,8 @@
           </v-list>
         </v-menu>
       </v-toolbar>
-
       <v-layout row wrap>
-        <v-flex xs12 sm6 md4 lg3 v-for="project in projects" :key="project.title">
+        <v-flex xs12 sm6 md4 lg3 v-for="project in filteredProjects" :key="project.title">
           <v-card class="ma-3">
             <v-responsive class="text-center pt-4">
               <v-avatar size ="100">
@@ -115,9 +122,17 @@
               </v-btn>
             </v-card-actions>
           </v-card>
+          <template v-slot:bottom="{pagination, options, updateOptions }">
+          <v-data-footer
+              :pagination="pagination"
+              :options="options"
+              :items-per-page-options="itemsPerPage"
+              @update:options="updateOptions"
+              items-per-page-text="$vuetify.dataTable.itemsPerPageText"/>
+          </template>
         </v-flex>
       </v-layout>
-
+      </v-data-iterator>
     </v-container>
 
   </div>
@@ -129,6 +144,9 @@ export default {
   components:{VueCountdown},
   data() {
     return {
+      itemsPerPage: [4,8,12,-1],
+      filter: '',
+      page: 1,
       sort: [
         {name: 'Alphabetisch', sortProperty:'title', ascending: true,icon:'sort_by_alpha'},
         {name: 'Restzeit', sortProperty:'due', ascending: true,icon: 'access_time'},
@@ -219,7 +237,16 @@ export default {
       });
       return formattedProps;
     },
-  }
+  },
+  computed:{
+    filteredProjects(){
+      return this.projects.filter(project => {
+        const filter = this.filter.toUpperCase();
+        const hasTitleMatch = project.title.toUpperCase().includes(filter);
+        return hasTitleMatch;
+      })
+    },
+  },
 }
 </script>
 <style scoped>

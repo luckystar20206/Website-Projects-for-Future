@@ -9,11 +9,21 @@
           Aktive Projekte
         </v-toolbar-title>
         <v-spacer></v-spacer>
+        <v-text-field
+            v-model="search"
+            clearable
+            flat
+            solo-inverted
+            hide-details
+            prepend-inner-icon="mdi-magnify"
+            label="Suche nach Projekten"
+            class ="shrink"
+        ></v-text-field>
         <v-menu
             bottom
             left
             rounded = "lg"
-            >
+        >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
                 dark
@@ -80,7 +90,7 @@
                   height="12"
                   :value ="getProgress(project)"
               >
-                 <!-- value = project.progress irgendwie setzen, ist aber keine zahl!-->
+                <!-- value = project.progress irgendwie setzen, ist aber keine zahl!-->
                 <strong>{{project.amount}}€ von {{project.needs}}€</strong>
 
               </v-progress-linear>
@@ -204,16 +214,13 @@ export default {
     },
     transformSlotProps(props) {
       const formattedProps = {};
-
       Object.entries(props).forEach(([key, value]) => {
         formattedProps[key] = value < 10 ? `0${value}` : String(value);
       });
-
       return formattedProps;
     },
   }
 }
 </script>
 <style scoped>
-
 </style>

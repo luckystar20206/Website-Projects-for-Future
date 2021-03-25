@@ -24,6 +24,7 @@
               bottom
               left
               rounded = "lg"
+              offset-y
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -51,6 +52,7 @@
               bottom
               left
               rounded = "lg"
+              offset-y
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -105,7 +107,7 @@
               <v-spacer></v-spacer>
               <v-card-actions>
                 <v-col class ="text-center">
-                  <v-btn class="text-center green accent-4 white--text">
+                  <v-btn class="green accent-4 white--text">
                     <v-icon small left>euro_symbol</v-icon>
                     <span class ="">Unterstützen</span>
                    <v-icon small right>euro_symbol</v-icon>
@@ -113,8 +115,9 @@
                 </v-col>
               </v-card-actions>
 <!--              Das Teilen Icon irgendwie nach rechts bringen-->
-              <v-col>
-                <v-btn icon left>
+              <v-flex class = "d-flex justify-space-between mx-4">
+                <div>
+                <v-btn icon>
                   <v-icon>thumb_up</v-icon>
                 </v-btn>
                 <span class="text-md-subtitle-2 black--text font-weight-bold ">{{project.upvoteCount}}</span>
@@ -122,11 +125,14 @@
                   <v-icon>thumb_down</v-icon>
                 </v-btn>
                 <span class="text-md-subtitle-2 black--text font-weight-bold ">{{project.downvoteCount}}</span>
-                <v-btn icon right>
+                </div>
+                <div>
+                  <v-btn icon>
                   <v-icon>share</v-icon>
                 </v-btn>
                 <span class="text-md-subtitle-2 black--text font-weight-bold">Teilen</span>
-              </v-col>
+                </div>
+                </v-flex>
             </v-card>
           </v-flex>
         </v-layout>

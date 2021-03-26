@@ -33,7 +33,8 @@ const routes = [
   {
     path: "/SoFunktionierts",
     name: "SoFunktionierts",
-    component: SoFunktionierts
+    component: SoFunktionierts,
+    meta:{transitionName: 'slide'},
   },
 
 ]

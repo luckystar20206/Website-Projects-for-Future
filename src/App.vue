@@ -2,7 +2,9 @@
   <v-app>
     <AppBar/>
     <v-main>
+      <transition-page>
       <router-view></router-view>
+      </transition-page>
     </v-main>
     <Footer/>
   </v-app>
@@ -18,19 +20,22 @@ import Footer from './components/Footer';
 import AppBar from './components/AppBar';
 import firebase from "firebase/app";
 import "firebase/auth";
+import TransitionPage from './transitions/TransitionPage.vue';
+
 
 export default {
   name: 'App',
   components: {
-    //HelloWorld,
     Footer,
     AppBar,
-    //Login,
-    //Register,
-    //NeuesProjekt,
-    //SoFunktionierts,
+    TransitionPage,
   },
 
+  data() {
+    return {
+      loggedIn: false,
+    };
+  },
   mounted() {
     this.setupFirebase();
   },
@@ -56,11 +61,7 @@ export default {
             this.$router.replace({ name: "login" });
           });
     }
-  },
-  data() {
-    return {
-      loggedIn: false
-    };
   }
 };
 </script>
+

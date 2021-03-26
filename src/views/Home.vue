@@ -18,74 +18,27 @@
           Contribute to save our world!
         </h2>
 
-        <p class="my-4 white--text font-weight-regular" >
+        <p class="my-4 black--text font-weight-regular" >
           Trage dazu bei dass unser Planet lebenswert bleibt und entscheide mit, <br>
           welches Projekt sich eignet, um das Klima konstruktiv zu beschützen.
         </p>
       </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
+    </v-row>
+    <v-row>
+      <v-col class = "mb-4 text-left">
+        <h3>
+          Projects for Future <br>
+          ~ Genug der Worte, rette das Klima ~
+        </h3>
+        <p class="my-4 black--text font-weight-regular">
+          Klimawandel und Naturkatastrophen, Umweltprobleme, Zerstörung der natürlichen Ressourcen, soziale Ungerechtigkeit oder Artensterben sind Probleme,
+          die nicht nur uns, sondern auch künftige Generationen betreffen werden, wenn wir nichts dagegen tun. Daher haben wir mit Projects for Future eine Spendenplattform ins Leben gerufen,
+          dass die Probleme der Welt konfrontiert, denn mit jeder Spende können wir gemeinsam den Verlauf der Erde ändern
+          und die Probleme reduzieren. <br>
+          Unsere ganzheitliche Token Ökonomie mit innovativen Integrationen wie Ethereum und Lightning unterscheidet Projects for Future von einfachen Spendenplattformen.
+        </p>
       </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
+      <CurrentProjects/>
     </v-row>
     <ActiveProjects/>
     <Newsletter/>
@@ -95,9 +48,10 @@
 <script>
   import Newsletter from "@/components/Newsletter";
   import ActiveProjects from "@/components/ActiveProjects";
+  import CurrentProjects from "@/components/CurrentProjects";
   export default {
     name: 'Home',
-    components: {ActiveProjects, Newsletter},
+    components: {ActiveProjects, Newsletter, CurrentProjects},
     data: () => ({
       ecosystem: [
         {

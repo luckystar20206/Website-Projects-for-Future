@@ -1,6 +1,6 @@
 <template>
   <div class="active projects">
-    <h1 class="subheading grey--text">Aktive Projekte</h1>
+    <h1 class="subheading black--text">Aktive Projekte</h1>
 
     <v-container class="my-5">
       <v-toolbar color="deep-purple accent-4" dense dark class="mb-6">
@@ -82,31 +82,32 @@
       </v-toolbar>
       <v-layout row wrap>
         <v-flex xs12 sm6 md4 lg3 v-for="project in filteredProjects" :key="project.title">
-          <v-card class="ma-3">
-            <v-responsive class="text-center pt-4">
-              <v-menu
-                  bottom
-                  rounded
-                  offset-y
-              >
-                <template v-slot:activator="{on}">
-                  <v-btn
-                      icon
-                      height="100"
-                      width="100"
-                      v-on="on">
-                    <v-avatar size="100">
-                      <img :src="project.img" alt="">
-                    </v-avatar>
-                  </v-btn>
-                </template>
-                <v-card>
-                  <v-img rounded height="250" width="250" class="mx-3 mt-4" :src="project.img">
-                  </v-img>
-                </v-card>
-              </v-menu>
-            </v-responsive>
+          <v-card class="ma-3 card-outer" hover height="95%" width="95%" >
+            <div class="card-text">
             <v-card-text>
+              <v-responsive class="text-center pt-4">
+                <v-menu
+                    bottom
+                    rounded
+                    offset-y
+                >
+                  <template v-slot:activator="{on}">
+                    <v-btn
+                        icon
+                        height="100"
+                        width="100"
+                        v-on="on">
+                      <v-avatar size="100">
+                        <img :src="project.img" alt="">
+                      </v-avatar>
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-img rounded height="250" width="250" class="mx-3 mt-4" :src="project.img">
+                    </v-img>
+                  </v-card>
+                </v-menu>
+              </v-responsive>
               <div class="text-center headline">{{ project.title }}</div>
               <v-progress-linear
                   color="green"
@@ -132,7 +133,9 @@
               <div class=ma-1><span class="text-md-subtitle-2 black--text font-weight-bold">Unterstützer: </span>
                 <span class=grey--text>{{ project.supporterCount }}</span></div>
             </v-card-text>
-            <v-card-actions>
+            </div>
+            <div class="card-actions">
+            <v-card-actions >
               <v-col class="text-center">
                 <v-btn class="green accent-4 white--text">
                   <v-icon small left>euro_symbol</v-icon>
@@ -141,7 +144,8 @@
                 </v-btn>
               </v-col>
             </v-card-actions>
-            <v-flex class="d-flex justify-space-between mx-4">
+            <v-card-actions>
+            <v-flex class="d-flex justify-space-between">
               <div>
                 <v-btn icon>
                   <v-icon>thumb_up</v-icon>
@@ -152,6 +156,7 @@
                 </v-btn>
                 <span class="text-md-subtitle-2 black--text font-weight-bold ">{{ project.downvoteCount }}</span>
               </div>
+              <v-spacer></v-spacer>
               <div>
                 <v-btn icon>
                   <v-icon>share</v-icon>
@@ -159,11 +164,12 @@
                 <span class="text-md-subtitle-2 black--text font-weight-bold">Teilen</span>
               </div>
             </v-flex>
+            </v-card-actions>
+            </div>
           </v-card>
         </v-flex>
       </v-layout>
     </v-container>
-
   </div>
 </template>
 
@@ -198,16 +204,19 @@ export default {
           amount: 77,
         },
         {
-          title: "Blumen gießen",
+          title: "LANGES PROJEKT",
           img: "/avatar-2.png",
-          goal: "Bienen retten",
-          needs: 230,
+          goal: "langes projekt dass sehr viele wörter in der zielbeschreibung hat damit man schauen kann " +
+              "ob das alles in die karte passt oder nicht, weil je nachdem muss ich schauen was ich sonst noch machen muss, css macht richtig viel spaß" +
+              "irgendwie hatten die leute recht was css angeht und ich finde das belastend, ich gehe sogar so weit, dass ich beim ziel die maximale anzahl der wörter anhand" +
+              "dieser beschreibung festlege. Man sollte das Ziel nicht unendlich lang werden lassen.",
+          needs: 23250,
           created: new Date(2021, 1, 1, 1, 1),
           due: new Date(2021, 5, 12, 9, 43),
           supporterCount: 0,
-          upvoteCount: 532,
-          downvoteCount: 34,
-          amount: 150,
+          upvoteCount: 53432,
+          downvoteCount: 3344,
+          amount: 1230,
         },
         {
           title: "Blumen gießen 2",
@@ -330,4 +339,16 @@ export default {
 }
 </script>
 <style lang="scss">
+.card-outer {
+  position: relative;
+  padding-bottom: 0px;
+}
+.card-text{
+  padding-bottom: 150px;
+}
+.card-actions {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
 </style>

@@ -9,19 +9,20 @@
         tile
     >
       <v-card-title class="teal">
-        <strong class="subheading">Get connected with us on social networks!</strong>
+        <strong class="subheading">Folge uns auf den sozialen Medien!</strong>
 
         <v-spacer></v-spacer>
 
         <v-btn
-            v-for="icon in icons"
-            :key="icon"
+            v-for="i in icons"
+            :key="i.icon"
+            :href="i.link"
             class="mx-4"
             dark
             icon
         >
           <v-icon size="24px">
-            {{ icon }}
+            {{ i.icon }}
           </v-icon>
         </v-btn>
       </v-card-title>
@@ -47,10 +48,10 @@ name: "Footer",
       'Contact Us',
     ],
     icons: [
-      'mdi-facebook',
-      'mdi-twitter',
-      'mdi-linkedin',
-      'mdi-instagram',
+      {icon:'mdi-facebook',link:'https://de-de.facebook.com/pg/blocklink/about/'},
+      {icon:'mdi-twitter',link:'https://twitter.com/blocklink_de'},
+      {icon:'mdi-linkedin',link:'https://www.linkedin.com/company/blocklink-gmbh/?originalSubdomain=ke'},
+      {icon:'mdi-instagram',}
     ],
   }),
 }

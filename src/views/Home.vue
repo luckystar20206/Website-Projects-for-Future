@@ -6,7 +6,7 @@
     </v-flex>
     <v-row class="my-12">
       <SaveClimate/>
-      <v-flex xs12 sm6 md4>
+      <v-flex xs9 sm6 md4 lg3 align-self-center>
       <CurrentProjects/>
       </v-flex>
     </v-row>

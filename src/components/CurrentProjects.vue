@@ -10,6 +10,7 @@
               show-arrows-on-hover
               light
               hide-delimiters
+              width = ""
               height = "750px">
     <h3 class="text-center white--text">Neueste Projekte</h3>
 

@@ -1,14 +1,13 @@
 <template>
   <v-footer
-      dark
       padless
   >
     <v-card
-        class="flex"
+        class="flex green accent-4 white--text"
         flat
         tile
     >
-      <v-card-title class="teal">
+      <v-card-title>
         <strong class="subheading">Folge uns auf den sozialen Medien!</strong>
 
         <v-spacer></v-spacer>

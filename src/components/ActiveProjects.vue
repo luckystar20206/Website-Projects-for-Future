@@ -1,9 +1,8 @@
 <template>
-  <div class="active projects">
+  <div class="active projects mt-8">
     <h1 class="subheading black--text">Aktive Projekte</h1>
-
     <v-container class="my-5">
-      <v-toolbar color="deep-purple accent-4" dense dark class="mb-6">
+      <v-toolbar color="green accent-4 white--text" dense dark class="mb-6">
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>
           Aktive Projekte

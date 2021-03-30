@@ -38,7 +38,7 @@
         color="white"
         text
         rounded
-        class="my-0"
+        class="my-0 hidden-xs-only"
     >{{ link.title }}
     </v-btn>
     </v-flex>

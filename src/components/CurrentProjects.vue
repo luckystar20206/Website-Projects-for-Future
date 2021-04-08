@@ -4,109 +4,109 @@
       class="rounded-lg"
       color = "green"
   >
-  <v-carousel cycle
-              interval = 8000
-              hide-delimiter-background
-              show-arrows-on-hover
-              light
-              hide-delimiters
-              width = ""
-              height = "750px">
-    <h3 class="text-center white--text">Neueste Projekte</h3>
+    <v-carousel cycle
+                interval = 8000
+                hide-delimiter-background
+                show-arrows-on-hover
+                light
+                hide-delimiters
+                width = ""
+                height = "750px">
+      <h3 class="text-center white--text">Neueste Projekte</h3>
 
-    <v-carousel-item
-        v-for="project in projects"
-        :key="project.title"
-        reverse-transition="slide-x-transition"
-        transition="slide-x-transition"
-    >
-      <v-card class="ma-3 card-outer" hover height="90%">
-        <div class="card-text">
-          <v-card-text>
-            <v-responsive class="text-center pt-4">
-              <v-menu
-                  bottom
-                  rounded
-                  offset-y
+      <v-carousel-item
+          v-for="project in projects"
+          :key="project.title"
+          reverse-transition="slide-x-transition"
+          transition="slide-x-transition"
+      >
+        <v-card class="ma-3 card-outer" hover height="90%">
+          <div class="card-text">
+            <v-card-text>
+              <v-responsive class="text-center pt-4">
+                <v-menu
+                    bottom
+                    rounded
+                    offset-y
+                >
+                  <template v-slot:activator="{on}">
+                    <v-btn
+                        icon
+                        height="100"
+                        width="100"
+                        v-on="on">
+                      <v-avatar size="100">
+                        <img :src="project.img" alt="">
+                      </v-avatar>
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-img rounded height="250" width="250" class="mx-3 mt-4" :src="project.img">
+                    </v-img>
+                  </v-card>
+                </v-menu>
+              </v-responsive>
+              <div class="text-center headline">{{ project.title }}</div>
+              <v-progress-linear
+                  color="green"
+                  height="12"
+                  :value="getProgress(project)"
+                  class="mt-2"
               >
-                <template v-slot:activator="{on}">
-                  <v-btn
-                      icon
-                      height="100"
-                      width="100"
-                      v-on="on">
-                    <v-avatar size="100">
-                      <img :src="project.img" alt="">
-                    </v-avatar>
+                <strong>{{ project.amount }}€ von {{ project.needs }}€</strong>
+
+              </v-progress-linear>
+              <div class="ma-1 mt-3"><span class="text-md-subtitle-2 black--text font-weight-bold">Ziel: </span>
+                <span class=grey--text>{{ project.goal }}</span></div>
+              <div class=ma-1><span
+                  class="text-md-subtitle-2 black--text font-weight-bold">Finanzbedarf: </span><span
+                  class=grey--text>{{ project.needs }}€</span></div>
+
+              <vue-countdown :time="getRemainingTime(project)" :transform="transformSlotProps"
+                             v-slot="{ days, hours, minutes, seconds}">
+                <div class=ma-1><span class="text-md-subtitle-2 black--text font-weight-bold">Restzeit：</span> <span
+                    class=grey--text>{{ days }} Tage, {{ hours }}:{{ minutes }}:{{ seconds }}.</span></div>
+              </vue-countdown>
+
+              <div class=ma-1><span class="text-md-subtitle-2 black--text font-weight-bold">Unterstützer: </span>
+                <span class=grey--text>{{ project.supporterCount }}</span></div>
+            </v-card-text>
+          </div>
+          <div class="card-actions">
+            <v-card-actions >
+              <v-col class="text-center">
+                <v-btn class="green accent-4 white--text">
+                  <v-icon small left>euro_symbol</v-icon>
+                  <span class="">Unterstützen</span>
+                  <v-icon small right>euro_symbol</v-icon>
+                </v-btn>
+              </v-col>
+            </v-card-actions>
+            <v-card-actions>
+              <v-flex class="d-flex justify-space-between">
+                <div>
+                  <v-btn icon>
+                    <v-icon>thumb_up</v-icon>
                   </v-btn>
-                </template>
-                <v-card>
-                  <v-img rounded height="250" width="250" class="mx-3 mt-4" :src="project.img">
-                  </v-img>
-                </v-card>
-              </v-menu>
-            </v-responsive>
-            <div class="text-center headline">{{ project.title }}</div>
-            <v-progress-linear
-                color="green"
-                height="12"
-                :value="getProgress(project)"
-                class="mt-2"
-            >
-              <strong>{{ project.amount }}€ von {{ project.needs }}€</strong>
-
-            </v-progress-linear>
-            <div class="ma-1 mt-3"><span class="text-md-subtitle-2 black--text font-weight-bold">Ziel: </span>
-              <span class=grey--text>{{ project.goal }}</span></div>
-            <div class=ma-1><span
-                class="text-md-subtitle-2 black--text font-weight-bold">Finanzbedarf: </span><span
-                class=grey--text>{{ project.needs }}€</span></div>
-
-            <vue-countdown :time="getRemainingTime(project)" :transform="transformSlotProps"
-                           v-slot="{ days, hours, minutes, seconds}">
-              <div class=ma-1><span class="text-md-subtitle-2 black--text font-weight-bold">Restzeit：</span> <span
-                  class=grey--text>{{ days }} Tage, {{ hours }}:{{ minutes }}:{{ seconds }}.</span></div>
-            </vue-countdown>
-
-            <div class=ma-1><span class="text-md-subtitle-2 black--text font-weight-bold">Unterstützer: </span>
-              <span class=grey--text>{{ project.supporterCount }}</span></div>
-          </v-card-text>
-        </div>
-        <div class="card-actions">
-          <v-card-actions >
-            <v-col class="text-center">
-              <v-btn class="green accent-4 white--text">
-                <v-icon small left>euro_symbol</v-icon>
-                <span class="">Unterstützen</span>
-                <v-icon small right>euro_symbol</v-icon>
-              </v-btn>
-            </v-col>
-          </v-card-actions>
-          <v-card-actions>
-            <v-flex class="d-flex justify-space-between">
-              <div>
-                <v-btn icon>
-                  <v-icon>thumb_up</v-icon>
-                </v-btn>
-                <span class="text-md-subtitle-2 black--text font-weight-bold ">{{ project.upvoteCount }}</span>
-                <v-btn icon>
-                  <v-icon>thumb_down</v-icon>
-                </v-btn>
-                <span class="text-md-subtitle-2 black--text font-weight-bold ">{{ project.downvoteCount }}</span>
-              </div>
-              <v-spacer></v-spacer>
-              <div>
-                <v-btn icon>
-                  <v-icon>share</v-icon>
-                </v-btn>
-                <span class="text-md-subtitle-2 black--text font-weight-bold">Teilen</span>
-              </div>
-            </v-flex>
-          </v-card-actions>
-        </div>
-      </v-card>
-    </v-carousel-item>
-  </v-carousel>
+                  <span class="text-md-subtitle-2 black--text font-weight-bold ">{{ project.upvoteCount }}</span>
+                  <v-btn icon>
+                    <v-icon>thumb_down</v-icon>
+                  </v-btn>
+                  <span class="text-md-subtitle-2 black--text font-weight-bold ">{{ project.downvoteCount }}</span>
+                </div>
+                <v-spacer></v-spacer>
+                <div>
+                  <v-btn icon>
+                    <v-icon>share</v-icon>
+                  </v-btn>
+                  <span class="text-md-subtitle-2 black--text font-weight-bold">Teilen</span>
+                </div>
+              </v-flex>
+            </v-card-actions>
+          </div>
+        </v-card>
+      </v-carousel-item>
+    </v-carousel>
   </v-card>
 </template>
 
@@ -267,7 +267,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .card-outer {
   position: relative;
   padding-bottom: 0px;

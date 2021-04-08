@@ -1,132 +1,79 @@
 <template>
-  <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="12" xs="12" sm="8" md="8">
+  <v-container fill-height>
+    <v-layout align-center justify-center>
+      <v-flex xs12 sm8 md6 lg4>
         <v-card class="elevation-12">
-          <v-window v-model="step">
-            <v-window-item :value="1">
-              <v-row>
-                <v-col cols="12" md="8">
-                  <v-card-text class="mt-12">
-                    <h1
-                        class="text-center display-2 teal--text text--accent-3"
-                    >Sign in to Diprella</h1>
-                    <div class="text-center mt-4">
-                      <v-btn class="mx-2" fab color="black" outlined>
-                        <v-icon>fab fa-facebook-f</v-icon>
-                      </v-btn>
-
-                      <v-btn class="mx-2" fab color="black" outlined>
-                        <v-icon>fab fa-google-plus-g</v-icon>
-                      </v-btn>
-                      <v-btn class="mx-2" fab color="black" outlined>
-                        <v-icon>fab fa-linkedin-in</v-icon>
-                      </v-btn>
-                    </div>
-                    <h4 class="text-center mt-4">Ensure your email for registration</h4>
-                    <v-form>
-                      <v-text-field
-                          label="Email"
-                          name="Email"
-                          prepend-icon="email"
-                          type="text"
-                          color="teal accent-3"
-                      />
-
-                      <v-text-field
-                          id="password"
-                          label="Password"
-                          name="password"
-                          prepend-icon="lock"
-                          type="password"
-                          color="teal accent-3"
-                      />
-                    </v-form>
-                    <h3 class="text-center mt-4">Forgot your password ?</h3>
-                  </v-card-text>
-                  <div class="text-center mt-3">
-                    <v-btn rounded color="teal accent-3" dark>SIGN IN</v-btn>
-                  </div>
-                </v-col>
-                <v-col cols="12" md="4" class="teal accent-3">
-                  <v-card-text class="white--text mt-12">
-                    <h1 class="text-center display-1">Hello, Friend!</h1>
-                    <h5
-                        class="text-center"
-                    >Enter your personal details and start journay with us</h5>
-                  </v-card-text>
-                  <div class="text-center">
-                    <v-btn rounded outlined dark @click="step++">SIGN UP</v-btn>
-                  </div>
-                </v-col>
-              </v-row>
-            </v-window-item>
-            <v-window-item :value="2">
-              <v-row class="fill-height">
-                <v-col cols="12" md="4" class="teal accent-3">
-                  <v-card-text class="white--text mt-12">
-                    <h1 class="text-center display-1">Welcome Back!</h1>
-                    <h5
-                        class="text-center"
-                    >To Keep connected with us please login with your personnel info</h5>
-                  </v-card-text>
-                  <div class="text-center">
-                    <v-btn rounded outlined dark @click="step--">Sign in</v-btn>
-                  </div>
-                </v-col>
-
-                <v-col cols="12" md="8">
-                  <v-card-text class="mt-12">
-                    <h1 class="text-center display-2 teal--text text--accent-3">Create Account</h1>
-                    <div class="text-center mt-4">
-                      <v-btn class="mx-2" fab color="black" outlined>
-                        <v-icon>fab fa-facebook-f</v-icon>
-                      </v-btn>
-
-                      <v-btn class="mx-2" fab color="black" outlined>
-                        <v-icon>fab fa-google-plus-g</v-icon>
-                      </v-btn>
-                      <v-btn class="mx-2" fab color="black" outlined>
-                        <v-icon>fab fa-linkedin-in</v-icon>
-                      </v-btn>
-                    </div>
-                    <h4 class="text-center mt-4">Ensure your email for registration</h4>
-                    <v-form>
-                      <v-text-field
-                          label="Name"
-                          name="Name"
-                          prepend-icon="person"
-                          type="text"
-                          color="teal accent-3"
-                      />
-                      <v-text-field
-                          label="Email"
-                          name="Email"
-                          prepend-icon="email"
-                          type="text"
-                          color="teal accent-3"
-                      />
-
-                      <v-text-field
-                          id="password"
-                          label="Password"
-                          name="password"
-                          prepend-icon="lock"
-                          type="password"
-                          color="teal accent-3"
-                      />
-                    </v-form>
-                  </v-card-text>
-                  <div class="text-center mt-n5">
-                    <v-btn rounded color="teal accent-3" dark>SIGN UP</v-btn>
-                  </div>
-                </v-col>
-              </v-row>
-            </v-window-item>
-          </v-window>
+          <v-toolbar dark color="green accent-4 white--text">
+            <v-toolbar-title>Register</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-form ref="form" v-model="valid">
+              <v-text-field
+                  prepend-icon="person"
+                  name="name"
+                  label="Accountname"
+                  type="name"
+                  v-model="form.name"
+                  :rules="nameRules"
+                  required
+                  data-cy="signinNameField"
+              >
+              </v-text-field>
+              <v-text-field
+                  prepend-icon="mail"
+                  name="email"
+                  label="Email"
+                  type="email"
+                  v-model="form.email"
+                  :rules="emailRules"
+                  required
+                  data-cy="signinEmailField"
+              >
+              </v-text-field>
+              <v-text-field
+                  prepend-icon="lock"
+                  name="password"
+                  label="Passwort"
+                  type="password"
+                  data-cy="signinPasswordField"
+                  v-model="form.password"
+                  :rules="passwordRules"
+                  required
+              >
+              </v-text-field>
+              <v-text-field
+                  prepend-icon="lock"
+                  name="confirmPassword"
+                  label="Bestätige Passwort"
+                  type="password"
+                  data-cy="signinPasswordField"
+                  v-model="form.confirmPassword"
+                  :rules="confirmRules"
+                  required
+              >
+              </v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+                block
+                color="primary lighten-2"
+                :disabled="!valid"
+                @click="pressed"
+                data-cy="signinSubmitBtn"
+            >Registrieren</v-btn>
+          </v-card-actions>
+          <v-footer dark color="green accent-4 white--text" bottom>
+            <v-toolbar-title>Bereits einen Account?</v-toolbar-title>
+            <v-spacer/>
+            <v-btn text
+                   color="white--text"
+                   to="/Login"
+            >Einloggen</v-btn>
+          </v-footer>
         </v-card>
-      </v-col>
-    </v-row>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -137,19 +84,52 @@ export default {
 name: "Register",
   data() {
     return {
-      email: "",
-      password: "",
-      error: ""
+      valid: false,
+      form: {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      },
+      nameRules: [
+        v => !!v || 'Accountname ist Pflichtfeld',
+      ],
+      emailRules: [
+        v => !!v || 'E-Mail ist Pflichtfeld',
+        v => /.+@.+/.test(v) || 'E-Mail muss gültig sein'
+      ],
+      passwordRules: [
+        v => !!v || 'Passwort ist Pflichtfeld',
+        v =>
+            v.length >= 6 ||
+            'Passwort muss min. 6 Zeichen lang sein'
+      ],
+      confirmRules: [
+        v => !!v || 'Passwort bestätigen ist Pflichtfeld',
+        v =>
+            v.length >= 6 ||
+            'Passwort muss min. 6 Zeichen lang sein',
+        v =>
+            v === this.form.password || 'Die Passwörter stimmen nicht überein',
+      ]
     };
   },
   methods: {
     pressed() {
       firebase
           .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
+          .createUserWithEmailAndPassword(this.form.email, this.form.password)
+          .then(data => {
+            data.user
+                .updateProfile({
+                  displayName: this.form.name
+                })
+                .then(() => {});
+            console.log("Name: "+ data.user.displayName);
+          })
           .then(() => {
-            console.log("here");
-            this.$router.replace({ name: "secret" });
+            this.$router.replace({ name: "Home" });
+            console.log("Redirecting to Home");
           })
           .catch(error => (this.error = error));
     }
@@ -169,10 +149,6 @@ input {
   font-size: 21px;
 }
 
-button {
-  width: 400px;
-  height: 75px;
-  font-size: 100%;
-}
+
 
 </style>

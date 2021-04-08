@@ -1,9 +1,9 @@
 <template>
   <v-container fill-height>
     <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md4>
+      <v-flex xs12 sm8 md6 lg4>
         <v-card class="elevation-12">
-          <v-toolbar dark color="primary">
+          <v-toolbar dark color="green accent-4 white--text">
             <v-toolbar-title>Login</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
@@ -22,7 +22,7 @@
               <v-text-field
                   prepend-icon="lock"
                   name="password"
-                  label="Password"
+                  label="Passwort"
                   type="password"
                   data-cy="signinPasswordField"
                   v-model="password"
@@ -34,19 +34,21 @@
           </v-card-text>
           <v-card-actions>
             <v-btn
-                color="primary"
+                block
+                color="primary lighten-2"
                 :disabled="!valid"
                 @click="submit"
                 data-cy="signinSubmitBtn"
-            >Login</v-btn
-            >
+            >Login</v-btn>
           </v-card-actions>
-          <v-toolbar dark color="primary" bottom>
+          <v-footer dark color="green accent-4 white--text" bottom>
             <v-toolbar-title>Noch kein Account?</v-toolbar-title>
-            <v-btn color="primary"
-                   @click="register"
+            <v-spacer/>
+            <v-btn text
+                   color="white--text"
+                   to="/Register"
             >Registrieren</v-btn>
-          </v-toolbar>
+          </v-footer>
         </v-card>
       </v-flex>
     </v-layout>
@@ -64,14 +66,14 @@ export default {
       email: '',
       password: '',
       emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid'
+        v => !!v || 'E-Mail ist Pflichtfeld',
+        v => /.+@.+/.test(v) || 'E-Mail muss gültig sein'
       ],
       passwordRules: [
-        v => !!v || 'Password is required',
+        v => !!v || 'Passwort ist Pflichtfeld',
         v =>
             v.length >= 6 ||
-            'Password must be greater than 6 characters'
+            'Passwort muss min. 6 Zeichen lang sein'
       ]
     };
   },
@@ -82,7 +84,7 @@ export default {
           .signInWithEmailAndPassword(this.email, this.password)
           .then(data => {
             console.log(data);
-            this.$router.replace({ name: "secret" });
+            this.$router.replace({ name: "Home" });
           })
           .catch(error => {
             this.error = error;
@@ -105,11 +107,6 @@ input {
   max-width: 500px
 }
 
-button {
-  width: 400px;
-  height: 75px;
-  font-size: 100%;
-}
 
 .error {
   color: red;

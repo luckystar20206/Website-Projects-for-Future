@@ -7,6 +7,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import SoFunktionierts from "@/views/SoFunktionierts";
 import NeuesProjekt from "@/views/NeuesProjekt";
+import NeuesProjektInfo from "@/views/NeuesProjektInfo";
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     meta: {requiresAuth: true}
   },
   {
+    path: "/NeuesProjektInfo",
+    name: "NeuesProjektInfo",
+    component: NeuesProjektInfo,
+  },
+  {
     path: "/SoFunktionierts",
     name: "SoFunktionierts",
     component: SoFunktionierts,
@@ -50,7 +56,7 @@ router.beforeEach((to, from, next) => {
   const isAuthenticated = firebase.auth().currentUser;
   console.log("isauthenticated", isAuthenticated);
   if (requiresAuth && !isAuthenticated) {
-    next("/Login");
+    next("/NeuesProjektInfo");
   } else {
     next();
   }

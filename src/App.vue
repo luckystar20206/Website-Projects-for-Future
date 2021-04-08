@@ -21,6 +21,7 @@ import AppBar from './components/AppBar';
 import firebase from "firebase/app";
 import "firebase/auth";
 import TransitionPage from './transitions/TransitionPage.vue';
+import store from './store/store'
 
 
 export default {
@@ -42,6 +43,7 @@ export default {
   methods: {
     setupFirebase() {
       firebase.auth().onAuthStateChanged(user => {
+        store.dispatch("fetchUser", user);
         if (user) {
           // User is signed in.
           console.log("signed in");
@@ -58,7 +60,7 @@ export default {
           .auth()
           .signOut()
           .then(() => {
-            this.$router.replace({ name: "login" });
+            this.$router.replace({ name: "Home" });
           });
     }
   }

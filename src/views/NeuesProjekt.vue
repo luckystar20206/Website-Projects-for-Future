@@ -1,12 +1,17 @@
 <template>
   <v-container>
-
+    Hier wird ein neues Projekt erstellt.
   </v-container>
 </template>
 
 <script>
+
+
+
+
 export default {
-  name: "NeuesProjekt"
+  name: "",
+  components: {}
 }
 </script>
 

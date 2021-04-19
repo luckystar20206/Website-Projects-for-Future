@@ -28,9 +28,9 @@ db.collection('projects').get().then(snapshot =>{
   setupProjects(snapshot.docs);
 });
 
-const projectsList = document.querySelector('.projects');
+//const projectsList = document.querySelector('.projects');
 const setupProjects = (data) => {
-  let html = '';
+  //let html = '';
   data.forEach(doc => {
     const project = doc.data();
     console.log(project)

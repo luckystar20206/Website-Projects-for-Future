@@ -42,7 +42,7 @@
     >{{ link.title }}
     </v-btn>
     </v-flex>
-    <v-btn v-if="user.loggedIn" flat color="white" text rounded @click="signOut">
+    <v-btn v-if="user.loggedIn" color="white" text rounded @click="signOut">
       <span>{{user.data.displayName}}</span>
       <v-icon right>logout</v-icon>
     </v-btn>

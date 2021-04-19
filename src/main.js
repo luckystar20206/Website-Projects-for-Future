@@ -19,9 +19,25 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const auth = firebase.auth();
+const db = firebase.firestore();
+
 let app;
 
-firebase.auth().onAuthStateChanged(user => {
+db.collection('projects').get().then(snapshot =>{
+  setupProjects(snapshot.docs);
+});
+
+const projectsList = document.querySelector('.projects');
+const setupProjects = (data) => {
+  let html = '';
+  data.forEach(doc => {
+    const project = doc.data();
+    console.log(project)
+  })
+}
+
+auth.onAuthStateChanged(user => {
   store.dispatch("fetchUser", user);
   console.log("user", user);
   if (!app) {

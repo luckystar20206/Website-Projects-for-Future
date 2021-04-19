@@ -111,9 +111,10 @@
 </template>
 
 <script>
-import ActiveProjects from "@/components/ActiveProjects";
+import VueCountdown from '@chenfengyuan/vue-countdown';
 export default {
   name: "CurrentProjects",
+  components: {VueCountdown},
   data() {
     return {
       projects: [
@@ -135,7 +136,7 @@ export default {
           goal: "langes projekt dass sehr viele wörter in der zielbeschreibung hat damit man schauen kann " +
               "ob das alles in die karte passt oder nicht, weil je nachdem muss ich schauen was ich sonst noch machen muss, css macht richtig viel spaß" +
               "irgendwie hatten die leute recht was css angeht und ich finde das belastend, ich gehe sogar so weit, dass ich beim ziel die maximale anzahl der wörter anhand" +
-              "dieser beschreibung festlege. Man sollte das Ziel nicht unendlich lang werden lassen.",
+              "dieser beschreibung festlege.",
           needs: 23250,
           created: new Date(2021, 1, 1, 1, 1),
           due: new Date(2021, 5, 12, 9, 43),
@@ -248,7 +249,6 @@ export default {
     }
   },
   methods:{
-    import: ActiveProjects.methods,
     getProgress(project) {
       return (project.amount / project.needs) * 100
     },

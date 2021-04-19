@@ -4,9 +4,6 @@
       :name="transitionName"
       :mode="transitionMode"
       :enter-active-class="transitionEnterActiveClass"
-      @beforeLeave="beforeLeave"
-      @enter="enter"
-      @afterEnter="afterEnter"
   >
     <slot/>
   </transition>

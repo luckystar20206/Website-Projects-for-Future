@@ -40,21 +40,46 @@
     </div>
 <!--    https://publish.twitter.com/?buttonType=HashtagButton&query=FridaysForFuture&widget=Button-->
     <a href="https://twitter.com/intent/tweet?button_hashtag=FridaysForFuture&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #FridaysForFuture</a>
+    <v-spacer/>
+    <div class="share">
+      <facebook :url="url" scale="3"></facebook>
+      <twitter :url="url" title="Schaut euch ProjectsForFuture an: " scale="3"></twitter>
+      <linkedin :url="url" scale="3"></linkedin>
+      <telegram :url="url" scale="3"></telegram>
+      <whats-app :url="url" title="Hallo, schau dir ProjectsForFuture an" scale="3"></whats-app>
+      <pinterest :url="url" scale="3"></pinterest>
+      <reddit :url="url" scale="3" title="Schau dir ProjectsForFuture an"></reddit>
+      <google :url="url" scale="3"></google>
+      <email :url="url" subject="Hallo, schau dir ProjectsForFuture an" scale="3"></email>
+    </div>
   </v-row>
 
 </template>
 
 <script>
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import {
+  Facebook,
+  Twitter,
+  Linkedin,
+  Pinterest,
+  Reddit,
+  Telegram,
+  WhatsApp,
+  Email,
+  Google
+} from "vue-socialmedia-share";
+
 const now = new Date();
 const endDate = new Date(2032, 11, 11, 0, 0);
 export default {
-  components: {VueCountdown},
-name: "Banner",
+  name: "Banner",
+  components: {VueCountdown,Facebook, Twitter, Linkedin, Pinterest, Reddit, Telegram, WhatsApp, Email, Google},
   data() {
     return {
       update: true,
       time: endDate - now,
+      url: "https://localhost:8080"
     }
   },
   methods: {
@@ -78,6 +103,9 @@ name: "Banner",
 .bg{
   background-size: cover;
   background-image: linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url(https://images.pexels.com/photos/1268076/pexels-photo-1268076.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260);
+}
+.share > span {
+  padding: 1em;
 }
 
 
